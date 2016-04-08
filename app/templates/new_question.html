@@ -1,0 +1,32 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<style type="text/css">
+
+
+</style>
+{% block title %}new{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+{#    <h1>{{ question_id }}</h1>#}
+    <form action="{{ url_for('new_question') }}" method="POST">
+        <input type="hidden" name="question_id" value="{{ question_id }}">
+        {{ form.hidden_tag() }}
+{#        <div class="form-group">#}
+{#        {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.author.label }} {{ form.author(class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.answer.label }} {{ form.answer(class='form-control') }}</div>#}
+{#        {{ form.submit(class='btn btn-default') }}#}
+
+        {{ wtf.quick_form(form) }}
+    </form>
+
+</div>
+
+{% endblock %}
+

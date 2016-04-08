@@ -1,0 +1,130 @@
+
+body{
+    margin: 0;
+    color: #000;
+}
+
+a{
+    text-decoration:none;
+}
+
+.Clear{
+    clear: both;
+}
+
+/* 返回顶部*/
+.backToTop {width: 40px; height: 42px; display: block; background: url(../img/gotoTop.gif) no-repeat 0 0; position: fixed; left: 50%; margin-left: 290px; bottom: 125px; z-index: 10000;}
+
+*html .backToTop {position: absolute; left: 50%; margin-left: 500px; z-index: 10000; bottom:auto; top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-125-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+
+
+/* 导航栏 */
+#nav-main{
+    background-color: #2aabd2;
+}
+
+#nav-logo{
+	margin-left: 8%;
+}
+
+#nav-fun{
+	margin-left: 6%;
+}
+
+#nav-fun li a{
+    color: #ffffff;
+}
+
+#nav-quest{
+	margin-left: 6%;
+    background-color: #5bc0de;
+    color: #ffffff;
+    border: 0;
+}
+
+#nav-login{
+    margin-right: 10%;
+}
+
+#nav-login li a{
+    color: #ffffff;
+}
+
+#container{
+    margin-top: 70px;
+    width:80%;
+}
+
+/* 左侧动态流 */
+.feed{
+    float: left;
+    width: 60%;
+}
+
+.feed-first{
+    height: 10px;
+}
+
+.feed-article{
+    margin-top: -10px;
+    font-weight:700;
+    font-size: 15px;
+    color: #2e6da4;
+}
+
+.que-meta{
+    font-size: 13px;
+    color: #8c8c8c;
+}
+
+/* 右侧功能 */
+.function{
+    float: right;
+    width: 35%;
+    margin-left: 30px;
+
+}
+
+.func-img{
+    height: 80%;
+    width: 80%;
+}
+
+.func-img img{
+    height: 100%;
+    width: 100%;
+}
+
+.fruits{
+    margin-top: 20px;
+
+}
+
+.fruits i{
+    display: block;
+    margin-bottom: 15px;
+}
+
+.treasure{
+
+}
+
+.treasure i{
+    display: block;
+    margin-bottom: 15px;
+}
+
+.fire{
+
+}
+
+.fire i{
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+

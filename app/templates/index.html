@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>趣鲁克</title>
+
+    <!-- 样式 -->
+    <link href="{{ url_for('static', filename='css/style.css', _external=True) }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}" rel="stylesheet">
+  </head>
+  <body>
+	<nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
+		<a class="navbar-brand" href="#" id="nav-logo">
+			<img alt="鲁克" src="#" id="img-logo">
+		</a>
+		<form class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="lu一下...">
+			</div>
+			<button type="submit" class="btn btn-default">GO</button>
+
+		</form>
+		<ul class="nav navbar-nav" id="nav-fun">
+			<li ><a href="#">发现 </a></li>
+			<li ><a href="#">话题 </a></li>
+            <li ><a href="#">活动 </a></li>
+			<li ><a href="#">消息 <span class="badge">18</span></a></li>
+		</ul>
+        <ul class="nav navbar-nav pull-right" id="nav-login">
+            { % if current_user.is_authenticated() % }
+            <li><a href="{{ url_for('/logout') }}">退出</a></li>
+            { % else % }
+            <li><a href="{{ url_for('/login') }}">登陆</a></li>
+            { % endif % }
+            <li ><a href="/register">注册 </a></li>
+        </ul>
+        <a class="btn btn-default navbar-btn" id="nav-quest">提问</a>
+	</nav> <!-- end nav -->
+
+    <!-- 模态框 -->
+        <div class="modal" id="quest-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">提问</h4>
+                    </div>
+                    <form action="{{ url_for('new_question') }}" method="POST">
+                    <div class="modal-body">
+                            <input type="hidden" name="question_id" value="{{ question_id }}">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                            {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>
+                            <div class="form-group">
+                            {{ form.author.label }} {{ form.author(class='form-control') }}</div>
+                            <div class="form-group">
+                            {{ form.answer.label }} {{ form.answer(class='form-control') }}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal">取消</a>
+                        {{ form.submit(class='btn btn-primary') }}
+                    </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- end modal -->
+
+    <div class="container" id="container">
+        <div class="feed" id="feed">
+            <div class="feed-first">
+               <span class="glyphicon glyphicon-th-list"></span>&nbsp动态
+            </div>
+            <hr>
+            {% for question in questions %}
+                <div class="feed-question">
+                <div class="topic-img">
+
+                </div>
+                <h3 class="feed-article">{{ question.question }}</h3>
+                <h5>{{ question.author }}，一个男人</h5>
+                <p>
+                    {{ question.answer }}
+                </p>
+                <div class="que-meta">
+                    <span class="glyphicon glyphicon-plus">关注问题</span>
+                    <span class="glyphicon glyphicon-flag">25条评论</span>
+                </div>
+                <hr>
+            </div> <!-- end question -->
+            {% endfor %}
+
+
+
+        </div>
+        <div class="function" id="function">
+            <p class="" style="color: #4cae4c;">每周趣闻</p>
+            <div class="func-img">
+{#                <img src="../static/img/4e13f51656ff1a96aca54bf98fefdd91_b.png" alt="">#}
+                <img src="{{ url_for('static', filename='img/4e13f51656ff1a96aca54bf98fefdd91_b.png', _external=True) }}" alt="">
+            </div>
+            <div class="fruits">
+                <i class="glyphicon glyphicon-book">&nbsp我的收藏</i>
+                <i class="glyphicon glyphicon-eye-open">&nbsp我关注的人</i>
+                <i class="glyphicon glyphicon-bell">&nbsp我关注的话题</i>
+                <i class="glyphicon glyphicon-apple">&nbsp我的回答</i>
+            </div>
+            <hr>
+            <div class="treasure">
+                <i class="glyphicon glyphicon-send">&nbsp我爱去的地方</i>
+                <i class="glyphicon glyphicon-th">&nbsp话题广场</i>
+                <i class="glyphicon glyphicon-headphones">&nbsp校园活动</i>
+                <i class="glyphicon glyphicon-earphone">&nbsp约吧</i>
+            </div>
+            <hr>
+            <div class="fire">
+                <i class="glyphicon glyphicon-fire">&nbsp热门话题</i>
+                <i class="glyphicon glyphicon-cutlery">&nbsp风云人物</i>
+                <i class="glyphicon glyphicon-hd-video">&nbsp查成绩</i>
+                <i class="glyphicon glyphicon-blackboard">&nbsp看课表</i>
+            </div>
+        </div>
+        <div class="Clear"></div>
+        <a href="#" class="backToTop"></a>
+
+
+
+    </div> <!-- end container -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <script>
+        $(function(){
+            $(".btn").click(function(){
+                $("#quest-modal").modal("toggle");
+            });
+        });
+    </script>
+  </body>
+</html>

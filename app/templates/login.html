@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登陆</title>
+    <!-- 自定义样式 -->
+    <link href="{{ url_for('static', filename='css/login.css', _external=True) }}" rel="stylesheet">
+{#    <!-- bootstrap样式 -->#}
+{#    <link href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}" rel="stylesheet">#}
+{#    <!-- Loading Flat UI -->#}
+{#    <link href="{{ url_for('static', filename='css/flat-ui.css', _external=True) }}" rel="stylesheet">#}
+
+</head>
+<body>
+    <div id="wrapper">
+	<form name="login-form" class="login-form" action="/login" method="POST">
+		<div class="header">
+            <h1>登录</h1>
+		</div>
+
+		<div class="content">
+            <input name="username" type="text" class="input username" placeholder="用户名" />
+            <div class="user-icon"></div>
+            <input name="password" type="password" class="input password" placeholder="密码" />
+            <div class="pass-icon"></div>
+		</div>
+
+		<div class="footer">
+            <input type="submit" name="submit" value="登录" class="button" />
+            <a href="/register" class="register">注册</a>
+		</div>
+	</form>
+    </div>
+<div class="gradient"></div>
+</body>
+</html>
