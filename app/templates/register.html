@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>登陆</title>
-    <!-- 自定义样式 -->
-    <link href="{{ url_for('static', filename='css/login.css', _external=True) }}" rel="stylesheet">
-</head>
-<body>
-    <div id="wrapper">
-	<form name="login-form" class="login-form" action="/register" method="POST">
-		<div class="header">
-            <h1>登录</h1>
-		</div>
-
-		<div class="content">
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <title>注册</title>#}
+{#    <!-- 自定义样式 -->#}
+{#    <link href="{{ url_for('static', filename='css/login.css', _external=True) }}" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#    <div id="wrapper">#}
+{#	<form name="login-form" class="login-form" action="/register" method="POST">#}
+{#		<div class="header">#}
+{#            <h1>注册</h1>#}
+{#		</div>#}
+{##}
+{#		<div class="content">#}
 {#            <input name="username" type="text" class="input username" placeholder="邮箱" />#}
-            {{ form.question(id='question',class="input username",placeholder="邮箱") }}
-            <div class="user-icon"></div>
+{#            {{ form.email(id='question',class="input username",placeholder="邮箱") }}#}
+{#            <div class="user-icon"></div>#}
 {#            <input name="username" type="text" class="input password" placeholder="用户名" />#}
-            {{ form.question(id='question',class="input username",placeholder="用户名") }}
-            <div class="user-icon"></div>
+{#            {{ form.username(id='question',class="input username",placeholder="用户名") }}#}
+{#            <div class="user-icon"></div>#}
 {#            <input name="password" type="password" class="input password" placeholder="密码" />#}
-            {{ form.question(id='question',class="input username",placeholder="密码") }}
-            <div class="pass-icon"></div>
-		</div>
-
-		<div class="footer">
-            <input type="submit" name="submit" value="注册" class="button" />
-            <a href="/login" class="register">登陆</a>
-		</div>
-
+{#            {{ form.password(id='question',class="input username",placeholder="密码") }}#}
+{#            <div class="pass-icon"></div>#}
+{#		</div>#}
+{##}
+{#		<div class="footer">#}
+{#            <input type="submit" name="submit" value="注册" class="button" />#}
+{#            <a href="/login" class="register">登陆</a>#}
+{#		</div>#}
+{##}
         {#        <div class="form-group">#}
 {#        {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>#}
 {#        <div class="form-group">#}
@@ -37,8 +37,41 @@
 {#        <div class="form-group">#}
 {#        {{ form.answer.label }} {{ form.answer(class='form-control') }}</div>#}
 {#        {{ form.submit(class='btn btn-default') }}#}
-	</form>
-    </div>
-<div class="gradient"></div>
-</body>
-</html>
+{#	</form>#}
+{#    </div>#}
+{#<div class="gradient"></div>#}
+{#</body>#}
+{#</html>#}
+
+
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<style type="text/css">
+
+
+</style>
+{% block title %}注册{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+{#    <h1>{{ question_id }}</h1>#}
+    <form action="{{ url_for('register') }}" method="POST">
+        {{ form.hidden_tag() }}
+{#        <div class="form-group">#}
+{#        {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.author.label }} {{ form.author(class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.answer.label }} {{ form.answer(class='form-control') }}</div>#}
+{#        {{ form.submit(class='btn btn-default') }}#}
+
+        {{ wtf.quick_form(form) }}
+    </form>
+
+</div>
+
+{% endblock %}
+

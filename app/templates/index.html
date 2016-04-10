@@ -30,11 +30,11 @@
 			<li ><a href="#">消息 <span class="badge">18</span></a></li>
 		</ul>
         <ul class="nav navbar-nav pull-right" id="nav-login">
-            { % if current_user.is_authenticated() % }
-            <li><a href="{{ url_for('/logout') }}">退出</a></li>
-            { % else % }
-            <li><a href="{{ url_for('/login') }}">登陆</a></li>
-            { % endif % }
+{#            {% if current_user.is_authenticated() %}#}
+{#            <li><a href="#">退出</a></li>#}
+{#            {% else %}#}
+{#            <li><a href="{{ url_for('/login') }}">登陆</a></li>#}
+{#            {% endif %}#}
             <li ><a href="/register">注册 </a></li>
         </ul>
         <a class="btn btn-default navbar-btn" id="nav-quest">提问</a>

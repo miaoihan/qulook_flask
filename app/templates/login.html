@@ -1,36 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>登陆</title>
-    <!-- 自定义样式 -->
-    <link href="{{ url_for('static', filename='css/login.css', _external=True) }}" rel="stylesheet">
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <title>登陆</title>#}
+{#    <!-- 自定义样式 -->#}
+{#    <link href="{{ url_for('static', filename='css/login.css', _external=True) }}" rel="stylesheet">#}
 {#    <!-- bootstrap样式 -->#}
 {#    <link href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}" rel="stylesheet">#}
 {#    <!-- Loading Flat UI -->#}
 {#    <link href="{{ url_for('static', filename='css/flat-ui.css', _external=True) }}" rel="stylesheet">#}
+{##}
+{#</head>#}
+{#<body>#}
+{#    <div id="wrapper">#}
+{#	<form name="login-form" class="login-form" action="/login" method="POST">#}
+{#		<div class="header">#}
+{#            <h1>登录</h1>#}
+{#		</div>#}
+{##}
+{#		<div class="content">#}
+{#            <input name="username" type="text" class="input username" placeholder="用户名" />#}
+{#            <div class="user-icon"></div>#}
+{#            <input name="password" type="password" class="input password" placeholder="密码" />#}
+{#            <div class="pass-icon"></div>#}
+{#		</div>#}
+{##}
+{#		<div class="footer">#}
+{#            <input type="submit" name="submit" value="登录" class="button" />#}
+{#            <a href="/register" class="register">注册</a>#}
+{#		</div>#}
+{#	</form>#}
+{#    </div>#}
+{#<div class="gradient"></div>#}
+{#</body>#}
+{#</html>#}
 
-</head>
-<body>
-    <div id="wrapper">
-	<form name="login-form" class="login-form" action="/login" method="POST">
-		<div class="header">
-            <h1>登录</h1>
-		</div>
 
-		<div class="content">
-            <input name="username" type="text" class="input username" placeholder="用户名" />
-            <div class="user-icon"></div>
-            <input name="password" type="password" class="input password" placeholder="密码" />
-            <div class="pass-icon"></div>
-		</div>
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<style type="text/css">
 
-		<div class="footer">
-            <input type="submit" name="submit" value="登录" class="button" />
-            <a href="/register" class="register">注册</a>
-		</div>
-	</form>
-    </div>
-<div class="gradient"></div>
-</body>
-</html>
+
+</style>
+{% block title %}登录{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+{#    <h1>{{ question_id }}</h1>#}
+    <form action="{{ url_for('register') }}" method="POST">
+        {{ form.hidden_tag() }}
+{#        <div class="form-group">#}
+{#        {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.author.label }} {{ form.author(class='form-control') }}</div>#}
+{#        <div class="form-group">#}
+{#        {{ form.answer.label }} {{ form.answer(class='form-control') }}</div>#}
+{#        {{ form.submit(class='btn btn-default') }}#}
+
+        {{ wtf.quick_form(form) }}
+    </form>
+
+</div>
+
+{% endblock %}

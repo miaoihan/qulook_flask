@@ -1,16 +1,16 @@
 #!/usr/bin/python
 # coding=utf-8
-from flask.ext.login import login_user
+from flask.ext.login import login_user, login_required
 
 from app import app, db
 from flask import render_template, request, url_for, redirect, flash
 from .model import Question, User
-from .forms import QuestionForm, LoginForm
+from .forms import QuestionForm, LoginForm, RegistrationForm
 
 
 @app.route('/')
 def home():
-    #主页动态
+    # 主页动态
     questions = Question.query.filter_by(del_status=1).order_by('created_time DESC')
     form = QuestionForm()
     return render_template('index.html', questions=questions, form=form)
@@ -30,14 +30,17 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if username == 'han' and password == '1234':
-            return redirect(url_for('home'))
-        else:
-            return render_template('register.html')
-    return render_template('register.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email=form.email.data,
+                    username=form.username.data,
+                    password=form.password.data,
+                    )
+        db.session.add(user)
+        db.session.commit()
+        flash('You can now login.')
+        return redirect(url_for('login'))
+    return render_template('/register.html', form=form)
 
 
 @app.route('/questions')
@@ -91,3 +94,9 @@ def del_question(question_id):
     question.del_status = 0
     db.session.commit()
     return redirect(url_for('show_question'))
+
+
+@app.route('/secret')
+@login_required
+def secret():
+    return 'Only authenticated users are allowed!'

@@ -4,7 +4,7 @@ from datetime import datetime
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from . import db
+from . import db, login_manager
 
 
 class Question(db.Model):
@@ -49,7 +49,7 @@ class Role(db.Model):
         return '<Role % r>' % self.name
 
 
-class User(UserMixin, db.Model):
+class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True)
     email = db.Column(db.String(80), nullable=False)
@@ -74,5 +74,11 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    if __name__ == '__main__':
-        db.create_all()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+if __name__ == '__main__':
+    db.create_all()
