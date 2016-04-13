@@ -21,8 +21,8 @@ class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Length(1, 64),
                                              Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('记住我')
-    submit = SubmitField('登录')
+    remember_me = BooleanField(u'记住我')
+    submit = SubmitField(u'登录')
 
 
 class RegistrationForm(Form):

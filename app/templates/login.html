@@ -42,7 +42,7 @@
 
 
 </style>
-{% block title %}登录{% endblock %}
+{% block title %}login{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -50,7 +50,7 @@
         {{ message }}
     {% endfor %}
 {#    <h1>{{ question_id }}</h1>#}
-    <form action="{{ url_for('register') }}" method="POST">
+    <form action="{{ url_for('login') }}" method="POST">
         {{ form.hidden_tag() }}
 {#        <div class="form-group">#}
 {#        {{ form.question.label }} {{ form.question(id='question',class='form-control') }}</div>#}
